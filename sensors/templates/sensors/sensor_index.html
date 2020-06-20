@@ -1,0 +1,9 @@
+{% if latest_sensor_list %}
+    <ul>
+    {% for sensor in latest_sensor_list %}
+        <li><a href="{% url 'sensors:sensor_detail' sensor.id %}">{{ sensor.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No sensor available.</p>
+{% endif %}
