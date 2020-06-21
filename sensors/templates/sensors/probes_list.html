@@ -1,0 +1,54 @@
+{% extends "sensors/base.html" %}
+
+{% block title %}RPI Sensors Manager - Home{% endblock %}
+
+{% block banner_div %}
+<h1>List of supported probes</h1>
+<p>There are {{ probes_count }} probes supported right now.</p>
+{% endblock %}
+
+
+
+
+{% block main_body %}
+<!-- Highlights -->
+<section class="wrapper">
+  <div class="inner">
+
+
+        <h4>List of the supported probes</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>driver name</th>
+                <th>description</th>
+                <th>unit</th>
+                <th>min</th>
+                <th>max</th>
+              </tr>
+            </thead>
+            {% if latest_probes_list %}
+            <tbody>
+              {% for probe in latest_probes_list %}
+
+                  <tr>
+                    <td>{{ probe.name }}</td>
+                    <td>{{ probe.description }}</td>
+                    <td>{{ probe.unit }} ({{ probe.unit_symbol }})</td>
+                    <td>{{ probe.min_value }}</td>
+                    <td>{{ probe.max_value }}</td>
+                  </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% else %}
+            <p>No probe available.</p>
+        {% endif %}
+
+
+  </div>
+</section>
+
+{% endblock %}

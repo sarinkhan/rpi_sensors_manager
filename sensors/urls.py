@@ -7,7 +7,7 @@ urlpatterns = [
     path('index/', views.IndexView.as_view(), name='landing_index'),
     path('', views.SensorsList.as_view(), name='sensors_index'),
     path('<int:pk>/', views.SensorDetailView.as_view(), name='sensor_detail'),
-
+    path('probe/', views.ProbesList.as_view(), name='probes_index'),
 ]
 
 """
