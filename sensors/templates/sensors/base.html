@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!--
+	Industrious by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>{% block title %}RPI Sensors Manager{% endblock %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="sensors manager is a webapp to manage sensors and generate config files for rpi-sensors-fetcher clients" />
+		<meta name="keywords" content="raspberry pi, sensor, django, manage, config, yaml" />
+		<link rel="stylesheet" href="{% static "assets/css/main.css" %}" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a class="logo" href="{% url 'sensors:landing_index' %}">RPI sensors manager</a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					{% block sidebar %}
+					<li><a href="{% url 'sensors:landing_index' %}">Home</a></li>
+					<li><a href="{% url 'sensors:sensors_index' %}">Sensors list</a></li>
+					{% endblock %}
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					{% block banner_div %}
+					<h1>Sensors Manager</h1>
+					<p>Configure and manage your sensors on a raspberry pi to consult or insert into a database</p>
+					{% endblock %}
+				</div>
+				{% block banner_vid %}
+				<video autoplay loop muted playsinline src="{% static "images/vid_banner_shrimp.mp4" %}"></video>
+				{% endblock %}
+			</section>
+
+			{% block main_body %}
+		<!-- Highlights -->
+			<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>generate configuration files</h2>
+						<p>Select the sensors you want to activate on a node, then generate
+							 a config file directly usable with the sensors fetcher client on your raspberry pi nodes.</p>
+					</header>
+					<div class="highlights">
+						<section>
+							<div class="content">
+								<header>
+									<a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
+									<h3>Configured sensors</h3>
+								</header>
+								<p>
+									There are {{ sensors_count }} sensors configured as of now.
+								</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
+									<h3>Supported probes</h3>
+								</header>
+								<p>Many probes are supported.</p>
+							</div>
+						</section>
+						<section>
+							<div class="content">
+								<header>
+									<a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
+									<h3>Measures</h3>
+								</header>
+								<p>Many measures recorded.</p>
+							</div>
+						</section>
+					</div>
+				</div>
+			</section>
+
+		<!-- CTA -->
+			<section id="cta" class="wrapper">
+				<div class="inner">
+					<h2>Use the data with Grafana</h2>
+					<p>
+						Once everything is setup, your nodes will collect data to your
+						database of choice. You can then use grafana to create cool dashboards!
+					</p>
+				</div>
+			</section>
+			{% endblock %}
+		<!-- Footer -->
+		{% block footer %}
+			<footer id="footer">
+				<div class="inner">
+					<div class="content">
+						<section>
+							<h4>Probes</h4>
+							<ul class="alt">
+								<ul class="plain">
+									<li><a href="https://github.com/sarinkhan/rpi_sensors_manager"><i class="icon fa-github"></i>rpi_sensors_manager</a></li>
+									<li><a href="https://github.com/sarinkhan/rpi-sensor-fetcher"><i class="icon fa-github"></i>rpi-sensor-fetcher</a></li>
+								</ul>
+							</ul>
+						</section>
+						<section>
+							<h4>Github repos</h4>
+							<ul class="plain">
+								<li><a href="https://github.com/sarinkhan/rpi_sensors_manager"><i class="icon fa-github"></i>rpi_sensors_manager</a></li>
+								<li><a href="https://github.com/sarinkhan/rpi-sensor-fetcher"><i class="icon fa-github"></i>rpi-sensor-fetcher</a></li>
+							</ul>
+						</section>
+					</div>
+					<div class="copyright">
+						&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
+					</div>
+				</div>
+			</footer>
+			{% endblock %}
+
+		<!-- Scripts -->
+			<script src="{% static "assets/js/jquery.min.js" %}"></script>
+			<script src="{% static "assets/js/browser.min.js" %}"></script>
+			<script src="{% static "assets/js/breakpoints.min.js" %}"></script>
+			<script src="{% static "assets/js/util.js" %}"></script>
+			<script src="{% static "assets/js/main.js" %}"></script>
+
+	</body>
+</html>

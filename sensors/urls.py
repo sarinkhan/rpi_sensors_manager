@@ -4,9 +4,10 @@ from . import views
 
 app_name = 'sensors'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='sensors_index'),
-    path('<int:pk>/', views.DetailView.as_view(), name='sensor_detail'),
-    path('sensor/<int:pk>/', views.DetailView.as_view(), name='detail'),
+    path('index/', views.IndexView.as_view(), name='landing_index'),
+    path('', views.SensorsList.as_view(), name='sensors_index'),
+    path('<int:pk>/', views.SensorDetailView.as_view(), name='sensor_detail'),
+
 ]
 
 """

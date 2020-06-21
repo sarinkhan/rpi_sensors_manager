@@ -1,0 +1,109 @@
+{% extends "sensors/base.html" %}
+
+{% block title %}RPI Sensors Manager - Home{% endblock %}
+
+{% block banner_div %}
+<h1>Sensors Manager</h1>
+<p>Configure and manage your sensors on a raspberry pi to consult or insert into a database</p>
+{% endblock %}
+
+
+
+
+{% block main_body %}
+<!-- Highlights -->
+<section class="wrapper">
+  <div class="inner">
+    <header class="special">
+      <h2>generate configuration files</h2>
+      <p>Select the sensors you want to activate on a node, then generate
+         a config file directly usable with the sensors fetcher client on your raspberry pi nodes.</p>
+    </header>
+    <div class="highlights">
+      <section>
+        <div class="content">
+          <header>
+            <a href="{% url 'sensors:sensors_index' %}" class="icon fa-vcard-o"><span class="label">Icon</span></a>
+            <h3>Configured sensors</h3>
+          </header>
+          <p>
+            There are {{ sensors_count }} sensors configured as of now.
+            <a href="{% url 'sensors:sensors_index' %}">View the sensors</a>
+          </p>
+        </div>
+      </section>
+      <section>
+        <div class="content">
+          <header>
+            <a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
+            <h3>Supported probes</h3>
+          </header>
+          <p>Many probes are supported.</p>
+        </div>
+      </section>
+      <section>
+        <div class="content">
+          <header>
+            <a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
+            <h3>Measures</h3>
+          </header>
+          <p>Many measures recorded.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="wrapper">
+  <div class="inner">
+    <h2>Use the data with Grafana</h2>
+    <p>
+      Once everything is setup, your nodes will collect data to your
+      database of choice. You can then use grafana to create cool dashboards!
+    </p>
+  </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+  <footer id="footer">
+    <div class="inner">
+      <div class="content">
+        <section>
+          <h4>Latest configured sensors</h4>
+          <ul class="alt">
+            {% if latest_sensor_list %}
+                <ul>
+                {% for sensor in latest_sensor_list %}
+                    <li><a href="{% url 'sensors:sensor_detail' sensor.id %}">{{ sensor.name }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No sensor available.</p>
+            {% endif %}
+          </ul>
+        </section>
+        <section>
+          <h4>Probes</h4>
+          <ul class="alt">
+            <ul class="plain">
+              <li><a href="https://github.com/sarinkhan/rpi_sensors_manager"><i class="icon fa-github"></i>rpi_sensors_manager</a></li>
+              <li><a href="https://github.com/sarinkhan/rpi-sensor-fetcher"><i class="icon fa-github"></i>rpi-sensor-fetcher</a></li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <h4>Github repos</h4>
+          <ul class="plain">
+            <li><a href="https://github.com/sarinkhan/rpi_sensors_manager"><i class="icon fa-github"></i>rpi_sensors_manager</a></li>
+            <li><a href="https://github.com/sarinkhan/rpi-sensor-fetcher"><i class="icon fa-github"></i>rpi-sensor-fetcher</a></li>
+          </ul>
+        </section>
+      </div>
+      <div class="copyright">
+        &copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
+      </div>
+    </div>
+  </footer>
+  {% endblock %}

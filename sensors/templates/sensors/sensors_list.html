@@ -1,0 +1,50 @@
+{% extends "sensors/base.html" %}
+
+{% block title %}RPI Sensors Manager - Home{% endblock %}
+
+{% block banner_div %}
+<h1>List of configured sensors</h1>
+<p>There are {{ sensors_count }} sensors configured as of now.</p>
+{% endblock %}
+
+
+
+
+{% block main_body %}
+<!-- Highlights -->
+<section class="wrapper">
+  <div class="inner">
+
+
+        {% if latest_sensor_list %}
+        <h4>List of the sensors</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for sensor in latest_sensor_list %}
+
+                  <tr>
+                    <td><a href="{% url 'sensors:sensor_detail' sensor.id %}">{{ sensor.name }}</a></td>
+                    <td>{{ sensor.description }}</td>
+                    <td>{{ sensor.id }}</td>
+                  </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% else %}
+            <p>No sensor available.</p>
+        {% endif %}
+        
+
+  </div>
+</section>
+
+{% endblock %}

@@ -6,15 +6,21 @@ from django.views import generic
 from .models import Sensor, Measures, ProbeDriver
 from django.utils import timezone
 
-class IndexView(generic.ListView):
-    template_name = 'sensors/sensor_index.html'
+
+class SensorsList(generic.ListView):
+    template_name = 'sensors/sensors_list.html'
     context_object_name = 'latest_sensor_list'
 
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Sensor.objects.order_by('-name')[:20]
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sensors_count'] = Sensor.objects.all().count()
+        return context
 
-class DetailView(generic.DetailView):
+    def get_queryset(self):
+        """Return the last 20 configured sensors."""
+        return Sensor.objects.order_by('id')[:20]
+
+class SensorDetailView(generic.DetailView):
     model = Sensor
     template_name = 'sensors/sensor_detail.html'
 
@@ -26,6 +32,19 @@ class DetailView(generic.DetailView):
         context['measures_count'] = Measures.objects.filter(sensor_id=context['sensor'].id).count()
         return context
 
+
+class IndexView(generic.ListView):
+    template_name = 'sensors/index.html'
+    context_object_name = 'latest_sensor_list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sensors_count'] = Sensor.objects.all().count()
+        return context
+
+    def get_queryset(self):
+        """Return the last five saved sensors."""
+        return Sensor.objects.order_by('-id')[:4]
 
 """
 def view_sensor(request, sensor_id):
